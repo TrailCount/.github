@@ -18,8 +18,7 @@ The work today falls in two lines:
   backend, with a React dashboard for viewing usage. One device has been in
   the field at **The Garden trailhead** (Keene Valley, NY) since May 2026,
   reporting on a daily cellular slot.
-- **Geospatial analysis** — interactive map applications describing the land
-  the counters sit on: remoteness from motorized access, trail steepness, and
+- **Geospatial analysis** — interactive map applications describing the wild lands: remoteness from motorized access, trail steepness, and
   (proposed) a full trail-network database.
 
 Public homepage: **[www.trailcount.io](https://www.trailcount.io/)**
