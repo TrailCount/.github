@@ -83,7 +83,7 @@ Engineering). Two efforts are in progress now:
   the current webapp, that can deliver its data over **WiFi**, over
   **cellular**, or in a **disconnected mode** with no radio at all. Early
   stage; no repository yet.
-- **Trail network database** (Golisano) — the proposed SE senior project above
+- **Trail network database** (Golisano) — A new Golisano Software Engineering senior project above
   ([trailDB](https://github.com/TrailCount/trailDB)).
 
 Completed student work this org grew from: the original trail counter
