@@ -74,18 +74,22 @@ pipelines, currently on test environments at CloudFront default URLs.
 
 ## Student projects
 
-TrailCount has been built with RIT student teams from the start, and two
-efforts are in progress now:
+TrailCount has been built with RIT student teams from the start, drawing on
+two colleges: counter **hardware and firmware** comes from the **Kate Gleason
+College of Engineering**, and the **web applications** come from the
+**Golisano College of Computing and Information Sciences** (Software
+Engineering). Two efforts are in progress now:
 
-- **Next-generation trail counter** — a Gleason College student team is
-  building a new counter, compatible with the current webapp, that can deliver
-  its data over **WiFi**, over **cellular**, or in a **disconnected mode**
-  with no radio at all. Early stage; no repository yet.
-- **Trail network database** — the proposed SE senior project above
+- **Next-generation trail counter** (Gleason) — a new counter, compatible with
+  the current webapp, that can deliver its data over **WiFi**, over
+  **cellular**, or in a **disconnected mode** with no radio at all. Early
+  stage; no repository yet.
+- **Trail network database** (Golisano) — the proposed SE senior project above
   ([trailDB](https://github.com/TrailCount/trailDB)).
 
-Completed student work this org grew from: the original trail counter (RIT MSD
-capstone P24572, 2024–25) and the V2 backend (Trailblazers SE team, 2025–26).
+Completed student work this org grew from: the original trail counter
+(Gleason MSD capstone P24572, 2024–25) and the V2 backend (Trailblazers SE
+team, Golisano, 2025–26).
 Both are preserved — the original firmware in the maintainer's
 [trail-counter-firmware](https://github.com/craigmcg) (frozen 2026-05-25,
 superseded by `counter-core`), and every Trailblazers branch tip as
