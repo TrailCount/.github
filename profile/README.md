@@ -13,7 +13,7 @@ long-term organizational form of trailcount.io is still being worked out.
 
 The work today falls in two lines:
 
-- **Trail counters** — battery-powered devices at trailheads that detect
+- **Trail usage** — battery-powered devices at trailheads that detect
   hikers with an IR sensor, buffer timestamps locally, and report to an AWS
   backend, with a React dashboard for viewing usage. One device has been in
   the field at **The Garden trailhead** (Keene Valley, NY) since May 2026,
