@@ -1,6 +1,6 @@
 # TrailCount
 
-TrailCount's mission is to **provide data that helps land stewards make
+TrailCount's mission is to **help land stewards make
 data-based decisions** — whether those stewards are public employees or work
 for private foundations. The initial focus is the Adirondack Park in northern
 New York, but the systems are not Adirondack-specific by design.
