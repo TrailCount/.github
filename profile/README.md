@@ -18,8 +18,8 @@ The work today falls in two lines:
   backend, with a React dashboard for viewing usage. One device has been in
   the field at **The Garden trailhead** (Keene Valley, NY) since May 2026,
   reporting on a daily cellular slot.
-- **Geospatial analysis** — interactive map applications describing the wild lands: remoteness from motorized access, trail steepness, and
-  (proposed) a full trail-network database.
+- **Geospatial analysis** — interactive map applications describing the wild lands: remoteness from motorized access, trail steepness,
+  large private landholdings, and (speculative) a full trail-network database.
 
 Public homepage: **[www.trailcount.io](https://www.trailcount.io/)**
 
@@ -46,28 +46,32 @@ of operation on one set of batteries.
 |---|---|---|
 | [counter-core](https://github.com/TrailCount/counter-core) | The firmware running on the fielded device: a hardware-free portable core (C++17, host-tested) plus platform ports. `platforms/stm32-counter` is the fielded build; `platforms/esp32-wifi` is an ESP32 variant. A new board is a new `platforms/<board>/` directory, not a new repository. | Active; `v2.4.0` in the field |
 | [webapp](https://github.com/TrailCount/webapp) | Backend + dashboard: API Gateway, Lambda, DynamoDB, Cognito, React. Deployed as four tenant-scoped Terraform workspaces (`adk-prod`/`adk-test` for the real deployment, `demo-prod`/`demo-test` with synthetic data). | Active; in production |
-| [homepage](https://github.com/TrailCount/homepage) | Static landing page at `trailcount.io`. S3 + CloudFront, no build step. | Live; the org's one public repo |
+| [homepage](https://github.com/TrailCount/homepage) | Static landing page at `trailcount.io`. S3 + CloudFront, no build step. Its Explore section links the dashboards and the explorer apps. | Live; the org's one public repo |
 | [hardware-spikes](https://github.com/TrailCount/hardware-spikes) | Bench experiments with no home in `counter-core`. Currently one: an ESP32 demonstrating mutual TLS against the V2 device API. | Reference |
 
 ### V2 backend
 
+On hold until device mutual TLS is actually needed; `webapp` (V1) is the line in use. Not to
+be confused with the student **V2 counter** below, which uses the V1 webapp.
+
 | Repo | What it is | State |
 |---|---|---|
-| [v2-backend](https://github.com/TrailCount/v2-backend) | A second-generation backend built by the Trailblazers student team through August 2026 and adopted into this org on 2026-08-18. Certificate-authenticated device API, its own React app and Terraform. Includes the device emulator (`testing/device-emulator/`). | One test environment (`testv2`); operated in parallel with V1 |
+| [v2-backend](https://github.com/TrailCount/v2-backend) | A second-generation backend built by the Trailblazers student team through August 2026 and adopted into this org on 2026-08-18. Certificate-authenticated device API, its own React app and Terraform. Includes the device emulator (`testing/device-emulator/`). | On hold; its one test environment (`testv2`) is kept running as the reference |
 | [device-emulator](https://github.com/TrailCount/device-emulator) | Python emulator for the V2 device API — certificates, registration, upload. | Archived; folded into `v2-backend` |
 
 ---
 
 ## Geospatial analysis
 
-Both deployed apps are React + MapLibre GL single-page sites over Python data
-pipelines, currently on test environments at CloudFront default URLs.
+The three deployed apps are React + MapLibre GL single-page sites over Python data
+pipelines, each on its own `trailcount.io` name and linked from the homepage.
 
 | Repo | What it is | State |
 |---|---|---|
-| [remexplore](https://github.com/TrailCount/remexplore) | **Remoteness Explorer**, built for AWA. Distance-to-motorized-access analysis across the Adirondack Park with scenario editing: remove a road or draw a proposed one and get defensible acreage for the change. Interactive field on the GPU; authoritative acreage from an exact distance transform on the server. Network edits are named, reviewable JSON packages, split into *corrections* (the data is wrong) and *proposals* (what if). | Working; not yet delivered to AWA users |
-| [steepness](https://github.com/TrailCount/steepness) | **Steepness Explorer.** Park-wide map of hiking-trail grade computed from DEM elevation sampled along the DEC trail network; filter by unit, trail type, and minimum grade. Its README documents the known limits — grade is only as honest as the trail line on the DEM. | First release 2026-08; deployed to a test environment |
-| [trailDB](https://github.com/TrailCount/trailDB) | **Trail Network Database and Data Platform** — from one data type at one point (hiker counts at trailheads) to the full network: a graph of segments, junctions, trailheads, and POIs, with routes as first-class entities and linked map / along-the-trail views. Proposed as an RIT Software Engineering senior project, sponsored by AWA, to be developed as open source. The proposal is in the repo under `docs/`. | Proposal; no code yet |
+| [remexplore](https://github.com/TrailCount/remexplore) | **Remoteness Explorer**, built for AWA. Distance-to-motorized-access analysis across the Adirondack Park with scenario editing: remove a road or draw a proposed one and get defensible acreage for the change. Interactive field on the GPU; authoritative acreage from an exact distance transform on the server. Network edits are named, reviewable JSON packages, split into *corrections* (the data is wrong) and *proposals* (what if). | Live at `remoteness.trailcount.io` |
+| [steepness](https://github.com/TrailCount/steepness) | **Steepness Explorer.** Park-wide map of hiking-trail grade computed from DEM elevation sampled along the DEC trail network; filter by unit, trail type, and minimum grade. Its README documents the known limits — grade is only as honest as the trail line on the DEM. | First release 2026-08; live at `steepness.trailcount.io` |
+| [privateland](https://github.com/TrailCount/privateland) | **Private Land Explorer.** Large private landholdings in the Adirondack Park — owners and their parent groups, APA land class, conservation easements, forest tax — built from state parcel and assessment-roll data. Private individuals are never named. | Live at `land.trailcount.io` |
+| [trailDB](https://github.com/TrailCount/trailDB) | **Trail Network Database and Data Platform** — from one data type at one point (hiker counts at trailheads) to the full network: a graph of segments, junctions, trailheads, and POIs, with routes as first-class entities and linked map / along-the-trail views. An RIT Software Engineering senior project, sponsored by AWA, to be developed as open source; the proposal is in the repo under `docs/`. | Speculative — a new student team will attempt it; no code yet |
 
 ---
 
@@ -81,10 +85,13 @@ Engineering). Two efforts are in progress now:
 
 - **Next-generation trail counter** (Gleason) — a new counter, compatible with
   the current webapp, that can deliver its data over **WiFi**, over
-  **cellular**, or in a **disconnected mode** with no radio at all. Early
-  stage; no repository yet.
-- **Trail network database** (Golisano) — A new Golisano Software Engineering senior project above
-  ([trailDB](https://github.com/TrailCount/trailDB)).
+  **cellular**, or in a **disconnected mode** with no radio at all. It uses the
+  current V1 webapp and logs to the `adk-test` tenant; despite its repo name,
+  [V2-trailcounter](https://github.com/TrailCount/V2-trailcounter), it is
+  unrelated to the V2 backend. Early stage.
+- **Trail network database** (Golisano) — a new Software Engineering senior-project
+  team will attempt the map platform above ([trailDB](https://github.com/TrailCount/trailDB)).
+  Speculative; no code yet.
 
 Completed student work this org grew from: the original trail counter
 (Gleason MSD capstone P24572, 2024–25) and the V2 backend (Trailblazers SE
